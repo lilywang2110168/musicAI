@@ -5,7 +5,7 @@ from midi_to_statematrix import *
 
 import multi_training
 import model
-OUTPUT_FOLDER = 'output_jazz/'
+OUTPUT_FOLDER = 'output_classical_music/'
 KEYS = {'c':[1,0,1,0,1,1,0,1,0,1,0,1]}
 KEY_CORRECT = False
 KEY = 'c'
@@ -63,14 +63,14 @@ def fetch_train_thoughts(m,pcs,batches,name="trainthoughts"):
 
 if __name__ == '__main__':
 
-	pcs = multi_training.loadPieces("jazz/piano")
+	pcs = multi_training.loadPieces("classical_music")
 
 	m = model.Model([300,300],[100,50], dropout=0.5)
 
-	m.learned_config = pickle.load(open("output_jazz/params3000.p", "rb"))
+	#m.learned_config = pickle.load(open("output_jazz/params3000.p", "rb"))
 
-	# multi_training.trainPiece(m, pcs, 10000)
+	multi_training.trainPiece(m, pcs, 10000)
 
-	gen_adaptive(m, pcs, 10, name="composition")
+	#gen_adaptive(m, pcs, 10, name="composition")
 
-	#pickle.dump( m.learned_config, open( "output/final_learned_config.p", "wb" ) )
+	pickle.dump( m.learned_config, open( "output_classical_music/final_learned_config.p", "wb" ) )
